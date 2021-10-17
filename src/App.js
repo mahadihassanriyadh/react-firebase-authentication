@@ -3,12 +3,15 @@ import Button from '@restart/ui/esm/Button';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { Col, Form, Row } from 'react-bootstrap';
 import initializeAuthentication from './Firebase/firebase.initialize';
+import { useState } from 'react';
 
 initializeAuthentication();
 const googleProvider = new GoogleAuthProvider();
 
 
 function App() {
+  const [email, setEmail] = useState(''); 
+  const [password, setPassword] = useState(''); 
   const auth = getAuth();
   const handleGoogleSignIn = () => {
     signInWithPopup(auth, googleProvider)
@@ -22,11 +25,15 @@ function App() {
   }
 
   const handleSignUp = e => {
-    console.log('Sign Up Bhai');
+    console.log(email, password);
     e.preventDefault();
   }
   const handleEmailChange = e => {
-    console.log(e.target.value);
+    setEmail(e.target.value);
+  }
+
+  const handlePassword = e => {
+    setPassword(e.target.value);
   }
 
   return (
@@ -38,7 +45,7 @@ function App() {
             Email
           </Form.Label>
           <Col sm={10}>
-            <Form.Control onChange={handleEmailChange} type="email" placeholder="Email" />
+            <Form.Control onBlur={handleEmailChange} type="email" placeholder="Email" />
           </Col>
         </Form.Group>
 
@@ -47,7 +54,7 @@ function App() {
             Password
           </Form.Label>
           <Col sm={10}>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control onBlur={handlePassword} type="password" placeholder="Password" />
           </Col>
         </Form.Group>
         <Form.Group as={Row} className="mb-3" controlId="formHorizontalCheck">
