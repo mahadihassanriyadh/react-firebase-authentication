@@ -1,7 +1,7 @@
 import './App.css';
 import Button from '@restart/ui/esm/Button';
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, updateProfile } from "firebase/auth";
-import { Col, Form, Row } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 import initializeAuthentication from './Firebase/firebase.initialize';
 import { useState } from 'react';
 
@@ -92,7 +92,7 @@ function App() {
   const verifyEmail = () => {
     sendEmailVerification(auth.currentUser)
       .then(() => {
-        
+
       })
       .catch(error => {
         setError(error.message);
